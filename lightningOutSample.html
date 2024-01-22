@@ -1,24 +1,39 @@
 <html>
   <head>
     <script src="https://summer20practice-dev-ed.my.site.com/customercommunity/lightning/lightning.out.js"></script>
-    <script>
-    $Lightning.use(
-      "c:YogaLightningOutApp", // name of the Lightning app
-      function () {
-        // Callback once framework and app loaded
-        $Lightning.createComponent(
-          "c:YogaLightningOutComp", // top-level component of your app
-          {}, // attributes to set on the component when created
-          "lightningLocator", // the DOM location to insert the component
-          function (cmp) {
-            // callback when component is created and active on the page
-          },
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jsforce/1.9.1/jsforce.min.js"></script>
+      <script>
+          var accessToken;
+           var instanceURL;
+          var conn = jsforce.Connection({
+            oauth2: {
+              clientId: '3MVG9SemV5D80oBcAhK_Yop6JIYKBqCMMwbEZwkaUg20J3CFdC.RqRvVwhVYHavgcp9Ycp.ghyighaWiM_5gZ',
+              clientSecret: '1BED984D175D40E7EC4F56FCC294530C36DA14079F164FD45709044192301933'
+              redirectUri: 'https://yogarajkv.github.io'
+            }
+          });
+          conn.login('yogarajamca08-hz8u@force.com', 'w@RAek3tJ@bm9irqLWbfpFwXvA6DI8JcwK', function (err, userInfo){
+            if (err) { return console.error(err); }
+                accessToken = conn.accessToken;
+                instanceURL = conn.instanceUrl;
+          });
+     
+          $Lightning.use(
+            "c:YogaLightningOutApp", // name of the Lightning app
+            function () {
+              // Callback once framework and app loaded
+              $Lightning.createComponent(
+                "c:YogaLightningOutComp", // top-level component of your app
+                {}, // attributes to set on the component when created
+                "lightningLocator", // the DOM location to insert the component
+                function (cmp) {
+                  // callback when component is created and active on the page
+                },
+              );
+            },
+            instanceURL, // Site endpoint
+             accessToken
         );
-      },
-      "https://summer20practice-dev-ed.lightning.force.com", // Site endpoint
-      "Bearer 00D8J0000004dZI!ARMAQBRG_w4wvXyT0Dlb9J03vIc0Xm71Mhu7QudWmSnm6zFvkW_3EwxGh1wX6xEONhg2.p.iit.ryIZ12Gl1lF2veJlCsyQA"
-      
-  );
 </script>
   </head>
   <body>
